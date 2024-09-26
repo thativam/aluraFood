@@ -15,7 +15,7 @@ Este repositório é destinado apenas para fins de aprendizado.
 - Java
 - Spring Boot
 - Spring Cloud
-- Docker (em desenvolvimento)
+- Docker
 
 ## Como Executar
 
@@ -29,7 +29,11 @@ Este repositório é destinado apenas para fins de aprendizado.
     ```
 3. Execute o projeto:
     ```bash
-    ./mvnw spring-boot:run
+    ./mvnw spring-boot:run 
+    ```
+    Ou opcionalmente:
+    ```bash
+    docker compose up 
     ```
 
 ## Licença
