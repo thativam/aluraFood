@@ -6,7 +6,7 @@ services:
       - /app/target
     working_dir: /app
     ports:
-      - "20001:8080"  # Map port 20001 on host to 8080 on container
+      - "20001:8080"
     command: ./mvnw spring-boot:run
     environment:
       - spring.datasource.url=jdbc:mysql://db:3306/aluraPag?serverTimezone=UTC&createDatabaseIfNotExist=true
