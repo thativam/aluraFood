@@ -4,6 +4,7 @@ import com.aluraFood.pagamentos.dto.PagamentoDto;
 import com.aluraFood.pagamentos.dto.PagamentoPatchDto;
 import com.aluraFood.pagamentos.service.PagamentoService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -13,6 +14,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
+
+import java.net.InetAddress;
 import java.net.URI;
 
 @RestController
@@ -61,6 +64,12 @@ public class PagamentoController {
     public ResponseEntity<PagamentoDto> remover(@PathVariable @NotNull Long id) {
         service.excluirPagamento(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/porta")
+    public String retornaPorta(@Value("${eureka.instance.instance-id}") String server) throws Exception {
+        InetAddress ip = InetAddress.getLocalHost();
+        return String.format("Requisição respondida pela instância %s em %s executando na porta %s",ip.getHostName(),ip.getHostName(), server);
     }
 
 }
