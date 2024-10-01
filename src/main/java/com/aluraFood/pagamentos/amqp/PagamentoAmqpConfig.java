@@ -1,6 +1,6 @@
 package com.aluraFood.pagamentos.amqp;
 
-import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.FanoutExchange;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitAdmin;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -13,8 +13,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class PagamentoAmqpConfig {
     @Bean
-    public Queue pagamentoQueue() {
-        return new Queue("pagamento.concluido", false);
+    public FanoutExchange fanoutExchange() {
+        return new FanoutExchange("pagamentos.ex");
     }
 
     @Bean

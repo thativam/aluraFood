@@ -48,7 +48,7 @@ public class PagamentoController {
         PagamentoDto pagamento = service.criarPagamento(dto);
         URI endereco = uriBuilder.path("/pagamentos/{id}").buildAndExpand(pagamento.getId()).toUri();
 
-        rbTemplate.convertAndSend("pagamento.concluido", pagamento);
+        rbTemplate.convertAndSend("pagamentos.ex","", pagamento);
         return ResponseEntity.created(endereco).body(pagamento);
     }
 
