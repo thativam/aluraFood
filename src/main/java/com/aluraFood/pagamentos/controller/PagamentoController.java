@@ -4,7 +4,6 @@ import com.aluraFood.pagamentos.dto.PagamentoDto;
 import com.aluraFood.pagamentos.dto.PagamentoPatchDto;
 import com.aluraFood.pagamentos.service.PagamentoService;
 
-import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -49,8 +48,7 @@ public class PagamentoController {
         PagamentoDto pagamento = service.criarPagamento(dto);
         URI endereco = uriBuilder.path("/pagamentos/{id}").buildAndExpand(pagamento.getId()).toUri();
 
-        Message message = new Message(("pag id " + pagamento.getId()).getBytes());
-        rbTemplate.send("pagamento.concluido", message);
+        rbTemplate.convertAndSend("pagamento.concluido", pagamento);
         return ResponseEntity.created(endereco).body(pagamento);
     }
 
